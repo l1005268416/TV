@@ -23,6 +23,7 @@ import org.simpleframework.xml.Root;
 import org.simpleframework.xml.core.Persister;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -69,6 +70,8 @@ public class Result implements Parcelable {
     private String format;
     @SerializedName("click")
     private String click;
+    @SerializedName("js")
+    private String js;
     @SerializedName("key")
     private String key;
     @SerializedName("pagecount")
@@ -79,6 +82,8 @@ public class Result implements Parcelable {
     private Integer code;
     @SerializedName("jx")
     private Integer jx;
+    @SerializedName("drm")
+    private Drm drm;
 
     public static Result objectFrom(String str) {
         try {
@@ -95,7 +100,7 @@ public class Result implements Parcelable {
 
     public static Result fromXml(String str) {
         try {
-            return new Persister().read(Result.class, str).trans();
+            return new Persister().read(Result.class, str, false).trans();
         } catch (Exception e) {
             return empty();
         }
@@ -125,13 +130,13 @@ public class Result implements Parcelable {
         type.setTypeFlag("1");
         type.setTypeId(item.getVodId());
         type.setTypeName(item.getVodName());
-        result.setTypes(List.of(type));
+        result.setTypes(Arrays.asList(type));
         return result;
     }
 
     public static Result type(String json) {
         Result result = new Result();
-        result.setTypes(List.of(Class.objectFrom(json)));
+        result.setTypes(Arrays.asList(Class.objectFrom(json)));
         return result.trans();
     }
 
@@ -142,7 +147,7 @@ public class Result implements Parcelable {
     }
 
     public static Result vod(Vod item) {
-        return list(List.of(item));
+        return list(Arrays.asList(item));
     }
 
     public Result() {
@@ -240,6 +245,14 @@ public class Result implements Parcelable {
         this.click = click;
     }
 
+    public String getJs() {
+        return TextUtils.isEmpty(js) ? "" : js;
+    }
+
+    public void setJs(String js) {
+        this.js = js;
+    }
+
     public String getKey() {
         return TextUtils.isEmpty(key) ? "" : key;
     }
@@ -270,6 +283,10 @@ public class Result implements Parcelable {
 
     public Integer getJx() {
         return jx == null ? 0 : jx;
+    }
+
+    public Drm getDrm() {
+        return drm;
     }
 
     public boolean hasMsg() {

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.provider.Settings;
 
 import com.fongmi.android.tv.player.Players;
+import com.fongmi.android.tv.utils.LanguageUtil;
 import com.github.catvod.utils.Prefers;
 
 public class Setting {
@@ -89,12 +90,12 @@ public class Setting {
         Prefers.put("player_live", player);
     }
 
-    public static int getDecode() {
-        return Prefers.getInt("decode", Players.HARD);
+    public static int getDecode(int player) {
+        return Prefers.getInt("decode_" + player, Players.HARD);
     }
 
-    public static void putDecode(int decode) {
-        Prefers.put("decode", decode);
+    public static void putDecode(int player, int decode) {
+        Prefers.put("decode_" + player, decode);
     }
 
     public static int getRender() {
@@ -193,8 +194,16 @@ public class Setting {
         Prefers.put("background", background);
     }
 
+    public static int getRtsp() {
+        return Prefers.getInt("rtsp");
+    }
+
+    public static void putRtsp(int rtsp) {
+        Prefers.put("rtsp", rtsp);
+    }
+
     public static int getSiteMode() {
-        return Prefers.getInt("site_mode");
+        return Prefers.getInt("site_mode", 1);
     }
 
     public static void putSiteMode(int mode) {
@@ -285,14 +294,6 @@ public class Setting {
         return Math.min(Math.max(Prefers.getInt("danmu_alpha", 90), 10), 100);
     }
 
-    public static void putDanmuSync(boolean sync) {
-        Prefers.put("danmu_sync", sync);
-    }
-
-    public static boolean isDanmuSync() {
-        return Prefers.getBoolean("danmu_sync", false);
-    }
-
     public static void putDanmuAlpha(int alpha) {
         Prefers.put("danmu_alpha", alpha);
     }
@@ -313,12 +314,12 @@ public class Setting {
         Prefers.put("exo_tunnel", tunnel);
     }
 
-    public static boolean isBackupAuto() {
-        return Prefers.getBoolean("backup_auto");
+    public static int getBackupMode() {
+        return Prefers.getInt("backup_mode", 1);
     }
 
-    public static void putBackupAuto(boolean auto) {
-        Prefers.put("backup_auto", auto);
+    public static void putBackupMode(int auto) {
+        Prefers.put("backup_mode", auto);
     }
 
     public static float getThumbnail() {
@@ -373,6 +374,14 @@ public class Setting {
         Prefers.put("display_mini_progress", display);
     }
 
+    public static boolean isDisplayVideoTitle() {
+        return Prefers.getBoolean("display_video_title", false);
+    }
+
+    public static void putDisplayVideoTitle(boolean display) {
+        Prefers.put("display_video_title", display);
+    }
+
     public static float getPlaySpeed() {
         return Prefers.getFloat("play_speed", 1.0f);
     }
@@ -389,6 +398,14 @@ public class Setting {
         return Prefers.getInt("fullscreen_menu_key", 0);
     }
 
+    public static void putHomeMenuKey(int key) {
+        Prefers.put("home_menu_key", key);
+    }
+
+    public static int getHomeMenuKey() {
+        return Prefers.getInt("home_menu_key", 0);
+    }
+
     public static boolean isHomeSiteLock() {
         return Prefers.getBoolean("home_site_lock", false);
     }
@@ -403,6 +420,102 @@ public class Setting {
 
     public static void putIncognito(boolean incognito) {
         Prefers.put("incognito", incognito);
+    }
+
+    public static void putSmallWindowBackKey(int key) {
+        Prefers.put("small_window_back_key", key);
+    }
+
+    public static int getSmallWindowBackKey() {
+        return Prefers.getInt("small_window_back_key", 0);
+    }
+
+    public static void putHomeDisplayName(boolean change) {
+        Prefers.put("home_display_name", change);
+    }
+
+    public static boolean isHomeDisplayName() {
+        return Prefers.getBoolean("home_display_name", false);
+    }
+
+    public static boolean isAggregatedSearch() {
+        return Prefers.getBoolean("aggregated_search", false);
+    }
+
+    public static void putAggregatedSearch(boolean search) {
+        Prefers.put("aggregated_search", search);
+    }
+
+    public static void putHomeUI(int key) {
+        Prefers.put("home_ui", key);
+    }
+
+    public static int getHomeUI() {
+        return Prefers.getInt("home_ui", 1);
+    }
+
+    public static void putHomeButtons(String buttons) {
+        Prefers.put("home_buttons", buttons);
+    }
+
+    public static String getHomeButtons(String defaultValue) {
+        return Prefers.getString("home_buttons", defaultValue);
+    }
+
+    public static void putHomeButtonsSorted(String buttons) {
+        Prefers.put("home_buttons_sorted", buttons);
+    }
+
+    public static String getHomeButtonsSorted(String defaultValue) {
+        return Prefers.getString("home_buttons_sorted", defaultValue);
+    }
+
+    public static boolean isHomeHistory() {
+        return Prefers.getBoolean("home_history", true);
+    }
+
+    public static void putHomeHistory(boolean show) {
+        Prefers.put("home_history", show);
+    }
+
+    public static void putConfigCache(int key) {
+        Prefers.put("config_cache", key);
+    }
+
+    public static int getConfigCache() {
+        return Math.min(Prefers.getInt("config_cache", 0), 2);
+    }
+
+    public static void putLanguage(int key) {
+        Prefers.put("language", key);
+    }
+
+    public static int getLanguage() {
+        return Prefers.getInt("language", LanguageUtil.locale());
+    }
+
+    public static void putParseWebView(int key) {
+        Prefers.put("parse_webview", key);
+    }
+
+    public static int getParseWebView() {
+        return Prefers.getInt("parse_webview", 0);
+    }
+
+    public static boolean isRemoveAd() {
+        return Prefers.getBoolean("remove_ad", false);
+    }
+
+    public static void putRemoveAd(boolean remove) {
+        Prefers.put("remove_ad", remove);
+    }
+
+    public static String getThunderCacheDir() {
+        return Prefers.getString("thunder_cache_dir", "");
+    }
+
+    public static void putThunderCacheDir(String dir) {
+        Prefers.put("thunder_cache_dir", dir);
     }
 
 }

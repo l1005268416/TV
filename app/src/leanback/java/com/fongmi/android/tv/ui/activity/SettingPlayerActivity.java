@@ -13,7 +13,6 @@ import com.fongmi.android.tv.databinding.ActivitySettingPlayerBinding;
 import com.fongmi.android.tv.impl.BufferCallback;
 import com.fongmi.android.tv.impl.SubtitleCallback;
 import com.fongmi.android.tv.impl.UaCallback;
-import com.fongmi.android.tv.player.ExoUtil;
 import com.fongmi.android.tv.player.Players;
 import com.fongmi.android.tv.ui.base.BaseActivity;
 import com.fongmi.android.tv.ui.dialog.BufferDialog;
@@ -26,10 +25,12 @@ public class SettingPlayerActivity extends BaseActivity implements UaCallback, B
     private ActivitySettingPlayerBinding mBinding;
     private String[] caption;
     private String[] player;
+    private String[] decode;
     private String[] render;
     private String[] scale;
     private String[] http;
     private String[] flag;
+    private String[] rtsp;
 
     public static void start(Activity activity) {
         activity.startActivity(new Intent(activity, SettingPlayerActivity.class));
@@ -52,10 +53,12 @@ public class SettingPlayerActivity extends BaseActivity implements UaCallback, B
         mBinding.tunnelText.setText(getSwitch(Setting.isTunnel()));
         mBinding.bufferText.setText(String.valueOf(Setting.getBuffer()));
         mBinding.subtitleText.setText(String.valueOf(Setting.getSubtitle()));
+        mBinding.rtspText.setText((rtsp = ResUtil.getStringArray(R.array.select_rtsp))[Setting.getRtsp()]);
         mBinding.flagText.setText((flag = ResUtil.getStringArray(R.array.select_flag))[Setting.getFlag()]);
         mBinding.httpText.setText((http = ResUtil.getStringArray(R.array.select_exo_http))[Setting.getHttp()]);
         mBinding.scaleText.setText((scale = ResUtil.getStringArray(R.array.select_scale))[Setting.getScale()]);
         mBinding.playerText.setText((player = ResUtil.getStringArray(R.array.select_player))[Setting.getPlayer()]);
+        mBinding.decodeText.setText((decode = ResUtil.getStringArray(R.array.select_decode))[Setting.getDecode(Setting.getPlayer())]);
         mBinding.renderText.setText((render = ResUtil.getStringArray(R.array.select_render))[Setting.getRender()]);
         mBinding.captionText.setText((caption = ResUtil.getStringArray(R.array.select_caption))[Setting.isCaption() ? 1 : 0]);
     }
@@ -63,11 +66,13 @@ public class SettingPlayerActivity extends BaseActivity implements UaCallback, B
     @Override
     protected void initEvent() {
         mBinding.ua.setOnClickListener(this::onUa);
+        mBinding.rtsp.setOnClickListener(this::setRtsp);
         mBinding.http.setOnClickListener(this::setHttp);
         mBinding.flag.setOnClickListener(this::setFlag);
         mBinding.scale.setOnClickListener(this::setScale);
         mBinding.buffer.setOnClickListener(this::onBuffer);
         mBinding.player.setOnClickListener(this::setPlayer);
+        mBinding.decode.setOnClickListener(this::setDecode);
         mBinding.render.setOnClickListener(this::setRender);
         mBinding.tunnel.setOnClickListener(this::setTunnel);
         mBinding.caption.setOnClickListener(this::setCaption);
@@ -92,11 +97,16 @@ public class SettingPlayerActivity extends BaseActivity implements UaCallback, B
         Setting.putUa(ua);
     }
 
+    private void setRtsp(View view) {
+        int index = Setting.getRtsp();
+        Setting.putRtsp(index = index == rtsp.length - 1 ? 0 : ++index);
+        mBinding.rtspText.setText(rtsp[index]);
+    }
+
     private void setHttp(View view) {
         int index = Setting.getHttp();
         Setting.putHttp(index = index == http.length - 1 ? 0 : ++index);
         mBinding.httpText.setText(http[index]);
-        ExoUtil.reset();
     }
 
     private void setFlag(View view) {
@@ -125,7 +135,15 @@ public class SettingPlayerActivity extends BaseActivity implements UaCallback, B
         int index = Setting.getPlayer();
         Setting.putPlayer(index = index == player.length - 1 ? 0 : ++index);
         mBinding.playerText.setText(player[index]);
+        mBinding.decodeText.setText(decode[Setting.getDecode(index)]);
         setVisible();
+    }
+
+    private void setDecode(View view) {
+        int player = Setting.getPlayer();
+        int index = Setting.getDecode(player);
+        Setting.putDecode(player, index = index == decode.length - 1 ? 0 : ++index);
+        mBinding.decodeText.setText(decode[index]);
     }
 
     private void setRender(View view) {

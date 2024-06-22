@@ -34,10 +34,18 @@ public class Device {
 
     public static Device get() {
         Device device = new Device();
-        device.setUuid(Util.getDeviceId());
+        device.setUuid(Util.getAndroidId());
         device.setName(Util.getDeviceName());
         device.setIp(Server.get().getAddress());
         device.setType(Product.getDeviceType());
+        return device;
+    }
+
+    public static Device get(org.fourthline.cling.model.meta.Device<?, ?, ?> item) {
+        Device device = new Device();
+        device.setUuid(item.getIdentity().getUdn().getIdentifierString());
+        device.setName(item.getDetails().getFriendlyName());
+        device.setType(2);
         return device;
     }
 

@@ -1,7 +1,7 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
     <!-- App -->
-    <string name="app_name">影视</string>
+    <string name="app_name">OK影视</string>
     <string name="app_exit">再按一次返回键退出</string>
 
     <!-- Vod -->
@@ -40,7 +40,9 @@
     <string name="play_netspeed">网速</string>
     <string name="play_duration">进度</string>
     <string name="play_mini_progress">迷你进度</string>
+    <string name="play_video_title">标题</string>
     <string name="play_danmu">弹幕</string>
+    <string name="play_display">屏显</string>
     <string name="play_speed">倍速</string>
     <string name="play_change">换源</string>
     <string name="play_forward">→</string>
@@ -74,23 +76,37 @@
     <string name="setting_player">播放设置</string>
     <string name="setting_danmu">弹幕设置</string>
     <string name="setting_custom">个性设置</string>
+    <string name="setting_config_cache">接口缓存</string>
+    <string name="setting_cache_dir">迅雷缓存</string>
+    <string name="setting_reset">重置App</string>
     <string name="setting_quality">图片品质</string>
     <string name="setting_size">图片尺寸</string>
+    <string name="setting_aggregated_search">聚合搜索</string>
+    <string name="setting_language">语言设置</string>
+    <string name="setting_parse_webview">嗅探内核</string>
     <string name="setting_fullscreen_menu_key">全屏菜单键</string>
+    <string name="setting_home_menu_key">首页菜单键</string>
     <string name="setting_home_site_lock">首页源锁定</string>
     <string name="setting_incognito">无痕模式</string>
+    <string name="setting_remove_ad">AI去广告</string>
+    <string name="setting_small_window_back_key">小窗返回键</string>
+    <string name="setting_home_display_name">首页显示站源</string>
+    <string name="setting_home_ui">首页UI</string>
+    <string name="setting_home_buttons">首页按钮</string>
     <string name="setting_doh">DoH</string>
     <string name="setting_proxy">Proxy</string>
     <string name="setting_cache">缓存</string>
     <string name="setting_backup">备份</string>
-    <string name="setting_backup_auto">自动</string>
+    <string name="setting_restore">恢复</string>
     <string name="setting_version">版本</string>
+    <string name="setting_about">关于</string>
     <string name="setting_storage">权限</string>
     <string name="setting_off">关闭</string>
     <string name="setting_on">开启</string>
 
     <!-- Player -->
     <string name="player">播放核心</string>
+    <string name="player_decode">解码方式</string>
     <string name="player_render">渲染方式</string>
     <string name="player_scale">缩放比例</string>
     <string name="player_caption">字幕样式</string>
@@ -107,6 +123,7 @@
     <string name="player_exo_tunnel">隧道模式</string>
     <string name="player_exo_http">连线方式</string>
     <string name="player_exo_buffer">缓冲时间</string>
+    <string name="player_rtsp">RTSP 通道</string>
     <string name="player_ua">User-Agent</string>
 
     <!-- Search -->
@@ -122,6 +139,13 @@
     <string name="dialog_config_hint">请输入接口…</string>
     <string name="dialog_config_name">请输入名称…</string>
     <string name="dialog_config_url">请输入地址…</string>
+    <string name="dialog_delete_record">删除全部纪录？</string>
+    <string name="dialog_delete_keep">收藏纪录将会全部删除。</string>
+    <string name="dialog_delete_history">观看纪录将会全部删除。</string>
+    <string name="dialog_reset_app">重置App?</string>
+    <string name="dialog_reset_app_data">所有数据将会被重置，App即将被关闭.</string>
+    <string name="dialog_restore">还原备份数据？</string>
+    <string name="dialog_restore_msg">将会还原配置、观看纪录及各项设置。</string>
 
     <!-- Error -->
     <string name="error_config_get">配置取得失败</string>
@@ -129,7 +153,7 @@
     <string name="error_play_next">已经是最后一集了！</string>
     <string name="error_play_prev">已经是第一集了！</string>
     <string name="error_play_parse">播放地址解析失败</string>
-    <string name="error_play_url">播放地址加载失败</string>
+    <string name="error_play_url">播放地址加载失败\n错误代码：<xliff:g name="name">%s</xliff:g></string>
     <string name="error_play_flag">暂无线路数据</string>
     <string name="error_play_timeout">连接超时</string>
     <string name="error_detail">暂无播放数据</string>
@@ -140,6 +164,12 @@
     <string name="update_check">正在检测更新…</string>
     <string name="update_confirm">更新</string>
 
+    <!-- X5 WebView -->
+    <string name="x5webview_title">X5 WebView</string>
+    <string name="x5webview_download_enable">解压X5 WebView并启用?</string>
+    <string name="x5webview_enabled">X5 WebView已启用</string>
+    <string name="x5webview_parsing">X5 WebView嗅探中</string>
+
     <!-- Crash -->
     <string name="crash_info">发生意外错误\n抱歉给您带来不便</string>
     <string name="crash_restart">重新启动</string>
@@ -149,11 +179,18 @@
 
     <!-- Hint -->
     <string name="copied">已复制</string>
+    <string name="backed">备份成功</string>
+    <string name="config_refreshed">接口已刷新</string>
 
     <!-- UNIT -->
     <string name="all">全部</string>
     <string name="times">倍</string>
     <string name="lines">行</string>
+
+    <string-array name="select_backup">
+        <item>自动</item>
+        <item>手动</item>
+    </string-array>
 
     <string-array name="select_decode">
         <item>软解</item>
@@ -219,6 +256,50 @@
         <item>选集</item>
     </string-array>
 
+    <string-array name="select_small_window_back_key">
+        <item>返回</item>
+        <item>焦点移动</item>
+    </string-array>
+
+    <string-array name="select_home_menu_key">
+        <item>选项弹窗</item>
+        <item>切换站源</item>
+        <item>切换线路</item>
+        <item>直播页面</item>
+        <item>历史页面</item>
+        <item>搜索页面</item>
+        <item>推送页面</item>
+        <item>收藏页面</item>
+        <item>设置页面</item>
+    </string-array>
+
+    <string-array name="select_language">
+        <item>英文</item>
+        <item>简体中文</item>
+        <item>繁体中文</item>
+    </string-array>
+
+    <string-array name="select_parse_webview">
+        <item>系统</item>
+        <item>X5 WebView</item>
+    </string-array>
+
+    <string-array name="select_home_recommend">
+        <item>播放历史</item>
+        <item>站点推荐</item>
+    </string-array>
+
+    <string-array name="select_home_ui">
+        <item>简洁风格</item>
+        <item>TVBox风格</item>
+    </string-array>
+
+    <string-array name="select_config_cache">
+        <item>关闭</item>
+        <item>12小时</item>
+        <item>24小时</item>
+    </string-array>
+
     <string-array name="select_caption">
         <item>预设</item>
         <item>系统</item>
@@ -228,6 +309,11 @@
         <item>选择音轨</item>
         <item>选择视轨</item>
         <item>选择字幕</item>
+    </string-array>
+
+    <string-array name="select_rtsp">
+        <item>UDP</item>
+        <item>TCP</item>
     </string-array>
 
 </resources>
